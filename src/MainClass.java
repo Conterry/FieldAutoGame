@@ -11,14 +11,20 @@ public class MainClass {
     public static void main(String[] args) {
         String[][] field = CreateField();
         Random rand = new Random();
-        Snake snake = new Snake(rand.nextInt(9), rand.nextInt(9));
-        snake.Up(field);
+        Snake snake = new Snake(rand.nextInt(8), rand.nextInt(8));
+        field[snake.x][snake.y] = "#";
+        int fps = 0, fpslimit = 10;
         while(true) {
-            int currentInt = rand.nextInt(3);
-            if(currentInt == 0) snake.Up(field);
-            else if(currentInt == 1) snake.Right(field);
-            else if(currentInt == 2) snake.Down(field);
-            else if(currentInt == 3) snake.Left(field);
+            if(fps==fpslimit) {
+                int currentInt = rand.nextInt(4);
+                if (currentInt == 1) snake.Up(field);
+                else if (currentInt == 2) snake.Right(field);
+                else if (currentInt == 3) snake.Down(field);
+                else if (currentInt == 4) snake.Left(field);
+                fps=0;
+            }
+            PrintField(field);
+            fps++;
         }
 
     }
